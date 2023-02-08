@@ -20,4 +20,7 @@ for i in range(repeat):
     number = str(random.randint(21, 99))
 
 
-    print(cword1 + " " + cword2 + " " + number) 
+    print(cword1 + " " + cword2 + " " + number)
+    with open("names.txt", "a") as file:
+        file.write(cword1 + " " + cword2 + " " + number + " ")
+
