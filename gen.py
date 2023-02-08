@@ -22,5 +22,5 @@ for i in range(repeat):
 
     print(cword1 + " " + cword2 + " " + number)
     with open("names.txt", "a") as file:
-        file.write(cword1 + " " + cword2 + " " + number + " ")
+        file.write(cword1 + " " + cword2 + " " + number + ", ")
 
