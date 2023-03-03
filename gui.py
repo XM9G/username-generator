@@ -3,25 +3,35 @@ import PySimpleGUI as sg
 import pyperclip
 
 sg.theme('Black')
+layout = [
+    [sg.TabGroup([
+        [sg.Tab('Username', [
+            [sg.Text("Username Generator", font=(20))],
+            [sg.HSeparator()],
+            [sg.Button('Generate Names')],
+            [sg.Slider(range=(1, 50), key='-UTIMES-', orientation='horizontal')],
+            [sg.Multiline(size=(25, 10), key='-OUTPUT-')],
+        ])],
+        [sg.Tab('Password', [
+            [sg.Text('Password Generator', font=(20))],
+            [sg.HSeparator()],
+            [sg.Checkbox("Include Lowercase", default=True, key="-LOW-")],
+            [sg.Checkbox("Include Capitals", default=False, key="-CAP-")],
+            [sg.Checkbox("Include Numbers", default=False, key="-NUM-")],
+            [sg.Checkbox("Include Symbols", default=False, key="-SYM-")],
+            [sg.Checkbox("Include Unsusual Symbols", default=False, key="-UNU-")],
+            [sg.Slider(range=(8, 20), orientation="horizontal", key="-LEN-")],
+            [sg.Text('Length')],
+            [sg.Button("Generate", size=(10,1))],
+            [sg.Text('Password: '), sg.Text("", key="output")],
+            [sg.Button('Copy', size=(10,1))],
+            [sg.Text("", key="copied")]
+        ])]
+    ])]
+]  
+          
 
-layout = [[sg.Text("Username Generator")],
-          [sg.Button('Generate Names')],
-          [sg.Slider(range=(1,50), key='-UTIMES-', orientation='horizontal')],
-          [sg.Multiline(size=(25, 10), key='-OUTPUT-')],
-          [sg.Text('Password Generator')],
-          [sg.Checkbox("Include Lowercase", default=True, key="-LOW-")],
-          [sg.Checkbox("Include Capitals", default=False, key="-CAP-")],
-          [sg.Checkbox("Include Numbers", default=False, key="-NUM-")],
-          [sg.Checkbox("Include Symbols", default=False, key="-SYM-")],         
-          [sg.Checkbox("Include Unsusual Symbols", default=False, key="-UNU-")],
-          [sg.Slider(range=(8, 20), orientation="horizontal", key="-LEN-")],
-          [sg.Text('Length')],
-          [sg.Button("Generate", size=(10,1))],
-          [sg.Text('Password: '), sg.Text("", key="output")],
-          [sg.Button('Copy', size=(10,1))],
-          [sg.Text("", key="copied")]]
-
-window = sg.Window('Username/Password Generator', layout, icon="icon.ico")
+window = sg.Window('Username/Password Generator', layout, icon="icon.ico", )
 
 lowerCase =["a","b",'c',"d","e",'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 upperCase =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
