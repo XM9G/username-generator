@@ -1,15 +1,11 @@
-import random
+# Password Generator
+
 import PySimpleGUI as sg
+import random
 import pyperclip
 
-sg.theme('Black')
-
-layout = [[sg.Text("Username Generator")],
-          [sg.Button('Generate Names')],
-          [sg.Slider(range=(1,50), key='-UTIMES-', orientation='horizontal')],
-          [sg.Multiline(size=(25, 10), key='-OUTPUT-')],
-          [sg.Text('Password Generator')],
-          [sg.Checkbox("Include Lowercase", default=True, key="-LOW-")],
+sg.theme("Black")
+layout = [[sg.Checkbox("Include Lowercase", default=True, key="-LOW-")],
           [sg.Checkbox("Include Capitals", default=False, key="-CAP-")],
           [sg.Checkbox("Include Numbers", default=False, key="-NUM-")],
           [sg.Checkbox("Include Symbols", default=False, key="-SYM-")],         
@@ -20,8 +16,9 @@ layout = [[sg.Text("Username Generator")],
           [sg.Text('Password: '), sg.Text("", key="output")],
           [sg.Button('Copy', size=(10,1))],
           [sg.Text("", key="copied")]]
+    
 
-window = sg.Window('Username/Password Generator', layout, icon="icon.ico")
+window = sg.Window('Password Generator', layout, size=(300,350))
 
 lowerCase =["a","b",'c',"d","e",'f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 upperCase =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
@@ -30,31 +27,17 @@ symbol =["~",'`','!','@','#','$','%',"^","&",'*',"(",")","_","-",'+','=','[',']'
 unsusualSymbols = ["ඞ","⁋","†","₿","₨","Ⅶ","√","Ꙛ","Ꝟ","‱","※","۞","֍","Ԫ","Ж","Ɋ","ʬ","ǁ","¦","¡","¾","ǂ","ჯ","฿","ᴁ","⁑","⃣",]
 
 password =""
+#length = int(input("Password Length: "))
+#useUppercase = input('Uppercase (y/n): ')
+#useNumbers = input('Numbers (y/n): ')
+#useSymbols = input('Symbols (y/n): ')
+
 
 while True:
     event, values = window.read()
-    if event == sg.WINDOW_CLOSED:
+    if event == sg.WIN_CLOSED:
         break
-    if event == 'Generate Names':
-        repeat = values['-UTIMES-']
-        name_list = []
-        for i in range(int(repeat)):
-            with open("word1.txt", "r") as file:
-                word1 = file.read().split()    
-                cword1 = random.choice(word1)
-
-            with open("word2.txt", "r") as file:
-                word2 = file.read().split()    
-                cword2 = random.choice(word2)
-
-            number = str(random.randint(21, 99))
-
-            name = cword1 + " " + cword2 + " " + number
-            name_list.append(name)
-            print(cword1 + " " + cword2 + " " + number)
-
-        window['-OUTPUT-'].update('\n'.join(name_list))
-
+# Calculation & output
     if event == "Generate":
         
 
@@ -107,4 +90,5 @@ while True:
     if event == "Copy":
         pyperclip.copy(password)
         window['copied'].update('Copied')
+        
 window.close()
