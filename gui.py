@@ -10,6 +10,7 @@ layout = [
             [sg.HSeparator()],
             [sg.Button('Generate Names')],
             [sg.Slider(range=(1, 50), key='-UTIMES-', orientation='horizontal')],
+            [sg.Checkbox('Save Names', default=False, key="-SAVE-")],
             [sg.Multiline(size=(25, 10), key='-OUTPUT-')],
         ])],
         [sg.Tab('Password', [
@@ -20,7 +21,7 @@ layout = [
             [sg.Checkbox("Include Numbers", default=False, key="-NUM-")],
             [sg.Checkbox("Include Symbols", default=False, key="-SYM-")],
             [sg.Checkbox("Include Unsusual Symbols", default=False, key="-UNU-")],
-            [sg.Slider(range=(8, 20), orientation="horizontal", key="-LEN-")],
+            [sg.Slider(range=(8, 100), orientation="horizontal", key="-LEN-")],
             [sg.Text('Length')],
             [sg.Button("Generate", size=(10,1))],
             [sg.Text('Password: '), sg.Text("", key="output")],
@@ -61,6 +62,12 @@ while True:
 
             name = cword1 + " " + cword2 + " " + number
             name_list.append(name)
+
+            if values['-SAVE-'] == True:
+                with open('names.txt', mode='a') as file:
+                    for item in name_list:
+                        file.write(item + '\n')
+
             print(cword1 + " " + cword2 + " " + number)
 
         window['-OUTPUT-'].update('\n'.join(name_list))
